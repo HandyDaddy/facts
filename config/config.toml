@@ -1,0 +1,7 @@
+[Application]
+Name = "facts-service"
+Version = "1.0.0"
+MaxBufferSize = 1000
+
+[HttpClient]
+Addr="https://development.kpi-drive.ru/_api/facts/save_fact"
