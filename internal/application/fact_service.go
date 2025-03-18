@@ -49,7 +49,7 @@ func (fs *FactService) Start(ctx context.Context) {
 	}()
 }
 
-// Shutdown -
+// Shutdown - graceful shutdown
 func (fs *FactService) Shutdown() {
 	fs.logger.Info("Starting graceful shutdown...")
 	close(fs.stopChan)
@@ -83,12 +83,11 @@ func (fs *FactService) AddFact(fact entities.Fact) error {
 	}
 }
 
-// processQueue обрабатывает очередь фактов
 func (fs *FactService) processQueue(ctx context.Context) {
 	for {
 		select {
 		case fact := <-fs.queue:
-			if err := fs.factClient.Save(ctx, &fact); err != nil {
+			if err := fs.factClient.SaveFact(ctx, &fact); err != nil {
 				fs.logger.Errorf("Failed to save fact: %v", err)
 				// При ошибке возвращаем факт в очередь
 				select {
@@ -110,7 +109,6 @@ func (fs *FactService) processQueue(ctx context.Context) {
 	}
 }
 
-// simulateIncomingData - симулирует потоковые данные
 func (fs *FactService) simulateIncomingData(ctx context.Context) {
 	fact := entities.Fact{
 		PeriodStart:         "2024-05-01",
