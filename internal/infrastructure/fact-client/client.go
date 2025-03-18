@@ -28,7 +28,7 @@ func NewHTTPClient(cfg *config.HttpClient) *HTTPFactsClient {
 	}
 }
 
-func (c HTTPFactsClient) Save(ctx context.Context, fact *entities.Fact) error {
+func (c HTTPFactsClient) SaveFact(_ context.Context, fact *entities.Fact) error {
 	data := url.Values{}
 	data.Set("period_start", fact.PeriodStart)
 	data.Set("period_end", fact.PeriodEnd)
@@ -65,7 +65,7 @@ func (c HTTPFactsClient) Save(ctx context.Context, fact *entities.Fact) error {
 	return nil
 }
 
-func (c HTTPFactsClient) Get(ctx context.Context, id string) (*entities.Fact, error) {
+func (c HTTPFactsClient) GetFact(ctx context.Context, id string) (*entities.Fact, error) {
 	//TODO implement me
 	panic("implement me")
 }
