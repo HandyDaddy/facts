@@ -8,6 +8,6 @@ import (
 
 // FactRepository is an interface for persistence
 type FactRepository interface {
-	Save(ctx context.Context, fact *entities.Fact) error
-	Get(ctx context.Context, id string) (*entities.Fact, error)
+	SaveFact(ctx context.Context, fact *entities.Fact) error
+	GetFact(ctx context.Context, id string) (*entities.Fact, error)
 }
